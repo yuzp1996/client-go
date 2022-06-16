@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6ad6139-026f-4ab6-85a8-bed41e58ae1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/util/jsonpath/jsonpath.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/jsonpath.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/jsonpath/jsonpath_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/jsonpath_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/jsonpath/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/node.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/jsonpath/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/parser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/jsonpath/parser_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/parser_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

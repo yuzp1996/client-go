@@ -1,6 +1,6 @@
 // This is a generated file. Do not edit directly.
 
-module k8s.io/client-go
+module github.com/yuzp1996/client-go
 
 go 1.18
 
