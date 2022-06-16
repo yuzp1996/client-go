@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d6ad6139-026f-4ab6-85a8-bed41e58ae1e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/util/jsonpath/jsonpath.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/jsonpath.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/jsonpath/jsonpath_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/jsonpath_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/jsonpath/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/node.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/jsonpath/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/parser.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/jsonpath/parser_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/jsonpath/parser_test.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file:///usr/local/Cellar/go/1.17.1/libexec" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="docker-desktop" />
+    <option name="namespace" value="default" />
+  </component>
+  <component name="ProjectId" id="2Abk8AT3LfeaF3c4oXBMHcnSIJp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Go Test.TestSignalCase in k8s.io/client-go/util/jsonpath">
+    <configuration name="TestRe in k8s.io/client-go/util/jsonpath" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="client-go" />
+      <working_directory value="$PROJECT_DIR$/util/jsonpath" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="k8s.io/client-go/util/jsonpath" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestRe\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestSignalCase in k8s.io/client-go/util/jsonpath" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="client-go" />
+      <working_directory value="$PROJECT_DIR$/util/jsonpath" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="k8s.io/client-go/util/jsonpath" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSignalCase\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test k8s.io/client-go/util/jsonpath" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="client-go" />
+      <working_directory value="$PROJECT_DIR$/util/jsonpath" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="k8s.io/client-go/util/jsonpath" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestSignalCase in k8s.io/client-go/util/jsonpath" />
+        <item itemvalue="Go Test.TestRe in k8s.io/client-go/util/jsonpath" />
+        <item itemvalue="Go Test.go test k8s.io/client-go/util/jsonpath" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/util/jsonpath/jsonpath_test.go</url>
+          <line>218</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/util/jsonpath/jsonpath_test.go</url>
+          <line>275</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/util/jsonpath/jsonpath.go</url>
+          <line>586</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/util/jsonpath/jsonpath.go</url>
+          <line>566</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

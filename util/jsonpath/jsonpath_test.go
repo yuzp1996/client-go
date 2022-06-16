@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"reflect"
 	"sort"
 	"strings"
@@ -33,6 +34,85 @@ type jsonpathTest struct {
 	expect      string
 	expectError bool
 }
+
+func TestRe(t *testing.T) {
+	pass, err := ReMatch("one",".*ne")
+	if !pass{
+		t.Errorf("want pass be ture get %v",pass)
+	}
+	if err!=nil{
+		t.Errorf("want err be nil but get %v",err)
+	}
+}
+
+
+func TestSignalCase(t *testing.T) {
+	types := map[string]interface{}{
+		"bools":      []bool{true, false, true, false},
+		"integers":   []int{1, 2, 3, 4},
+		"floats":     []float64{1.0, 2.2, 3.3, 4.0},
+		"strings":    []string{"one", "two", "three", "four"},
+		"interfaces": []interface{}{true, "one", 1, 1.1},
+		"maps": []map[string]interface{}{
+			{"name": "one", "value": 1},
+			{"name": "two", "value": 2.02},
+			{"name": "three", "value": 3.03},
+			{"name": "four", "value": 4.04},
+		},
+		"structs": []struct {
+			Name  string      `json:"name"`
+			Value interface{} `json:"value"`
+			Type  string      `json:"type"`
+		}{
+			{Name: "one", Value: 1, Type: "integer"},
+			{Name: "two", Value: 2.002, Type: "float"},
+			{Name: "three", Value: 3, Type: "integer"},
+			{Name: "four", Value: 4.004, Type: "float"},
+		},
+	}
+
+	pathTest := jsonpathTest{"filter", `{.structs[?(@.Name=~".*ne")].Value}`, types, `1`, false}
+
+	test(pathTest,t)
+}
+
+
+
+
+func test(pathTest jsonpathTest,t *testing.T){
+	j := New(pathTest.name)
+	j.AllowMissingKeys(true)
+	err := j.Parse(pathTest.template)
+	if err != nil {
+		if !pathTest.expectError {
+			t.Errorf("in %s, parse %s error %v", pathTest.name, pathTest.template, err)
+		}
+		log.Println("error happend")
+		return
+	}
+	buf := new(bytes.Buffer)
+
+	fullResults, err := j.FindResults(pathTest.input)
+	log.Printf("fullResults is %#v",fullResults)
+
+
+	// 调用
+	err = j.Execute(buf, pathTest.input)
+	if pathTest.expectError {
+		if err == nil {
+			t.Errorf(`in %s, expected execute error, got %q`, pathTest.name, buf)
+		}
+		log.Println("error happend")
+		return
+	} else if err != nil {
+		t.Errorf("in %s, execute error %v", pathTest.name, err)
+	}
+	out := buf.String()
+	if out != pathTest.expect {
+		t.Errorf(`in %s, expect to get "%s", got "%s"`, pathTest.name, pathTest.expect, out)
+	}
+}
+
 
 func testJSONPath(tests []jsonpathTest, allowMissingKeys bool, t *testing.T) {
 	for _, test := range tests {

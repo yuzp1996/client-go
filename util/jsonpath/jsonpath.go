@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"io"
 	"reflect"
+	"regexp"
 	"strings"
 
 	"k8s.io/client-go/third_party/forked/golang/template"
@@ -66,10 +67,12 @@ func (j *JSONPath) Parse(text string) error {
 
 // Execute bounds data into template and writes the result.
 func (j *JSONPath) Execute(wr io.Writer, data interface{}) error {
+	// 这里就是直接从数据中拿值了 FindResults 是针对于传入的值来说的
 	fullResults, err := j.FindResults(data)
 	if err != nil {
 		return err
 	}
+	// 为什么要 返回一个 二维数组
 	for ix := range fullResults {
 		if err := j.PrintResults(wr, fullResults[ix]); err != nil {
 			return err
@@ -78,13 +81,19 @@ func (j *JSONPath) Execute(wr io.Writer, data interface{}) error {
 	return nil
 }
 
+// FindResults  返回了找到的所有的值的地方  返回的 reflect 就是塞值的地儿
 func (j *JSONPath) FindResults(data interface{}) ([][]reflect.Value, error) {
 	if j.parser == nil {
 		return nil, fmt.Errorf("%s is an incomplete jsonpath template", j.name)
 	}
 
+	// 这里进来的 value 都是一些正规的数据了 有可能不是json字符什么的
 	cur := []reflect.Value{reflect.ValueOf(data)}
+	// 这里的 node 肯定是在 parse 中塞进来的
+	// parse 先占坑 将 template 中的模板通过坑位占住  这里再进行数据的填充
+	// node 和 这里的这些 data 是怎么搞在一起的呢
 	nodes := j.parser.Root.Nodes
+
 	fullResult := [][]reflect.Value{}
 	for i := 0; i < len(nodes); i++ {
 		node := nodes[i]
@@ -116,6 +125,7 @@ func (j *JSONPath) FindResults(data interface{}) ([][]reflect.Value, error) {
 				// If the range has no results, we still need to process the nodes within the range
 				// so the position will advance to the end node
 				j.parser.Root.Nodes = nodes[i+1:]
+				// 又按照树的模式往下找了 不对 是递归的方式  所以还是得看看 node 是怎么加进来的吧
 				_, err := j.FindResults(nil)
 				if err != nil {
 					return nil, err
@@ -553,6 +563,8 @@ func (j *JSONPath) evalFilter(input []reflect.Value, node *FilterNode) ([]reflec
 				pass, err = template.LessEqual(left, right)
 			case ">=":
 				pass, err = template.GreaterEqual(left, right)
+			case "=~":
+				pass, err = ReMatch(left, right)
 			default:
 				return results, fmt.Errorf("unrecognized filter operator %s", node.Operator)
 			}
@@ -566,6 +578,15 @@ func (j *JSONPath) evalFilter(input []reflect.Value, node *FilterNode) ([]reflec
 	}
 	return results, nil
 }
+
+
+func ReMatch(left interface{},right interface{})(bool,error){
+	//str := "Golang regular expressions example"
+
+	//match, err := regexp.MatchString(`.*BuildRef$`, left.(string))
+	return regexp.MatchString(right.(string),left.(string))
+}
+
 
 // evalToText translates reflect value to corresponding text
 func (j *JSONPath) evalToText(v reflect.Value) ([]byte, error) {

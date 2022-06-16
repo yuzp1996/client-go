@@ -29,24 +29,77 @@ type parserTest struct {
 
 var parserTests = []parserTest{
 	{"plain", `hello jsonpath`, []Node{newText("hello jsonpath")}, false},
+
 	{"variable", `hello {.jsonpath}`,
-		[]Node{newText("hello "), newList(), newField("jsonpath")}, false},
+		[]Node{
+				newText("hello "),
+				newList(),
+				newField("jsonpath")},
+			false},
 	{"arrayfiled", `hello {['jsonpath']}`,
-		[]Node{newText("hello "), newList(), newField("jsonpath")}, false},
+		[]Node{
+				newText("hello "),
+				newList(),
+				newField("jsonpath")},
+		false},
+
+
+
+
 	{"quote", `{"{"}`, []Node{newList(), newText("{")}, false},
-	{"array", `{[1:3]}`, []Node{newList(),
-		newArray([3]ParamsEntry{{1, true, false}, {3, true, false}, {0, false, false}})}, false},
+
+
+
+	{
+		"array",
+		`{[1:3]}`,
+		[]Node{
+					newList(),
+					newArray([3]ParamsEntry{
+						{1, true, false},
+						{3, true, false},
+						{0, false, false}})},
+		false,
+	},
+
+
+
 	{"allarray", `{.book[*].author}`,
-		[]Node{newList(), newField("book"),
-			newArray([3]ParamsEntry{{0, false, false}, {0, false, false}, {0, false, false}}), newField("author")}, false},
-	{"wildcard", `{.bicycle.*}`,
-		[]Node{newList(), newField("bicycle"), newWildcard()}, false},
-	{"filter", `{[?(@.price<3)]}`,
-		[]Node{newList(), newFilter(newList(), newList(), "<"),
-			newList(), newField("price"), newList(), newInt(3)}, false},
+		[]Node{
+				newList(),
+				newField("book"),
+				newArray([3]ParamsEntry{
+				{0, false, false},
+				{0, false, false},
+				{0, false, false}}),
+				newField("author")},
+		false},
+
+
+			{"wildcard", `{.bicycle.*}`,
+		[]Node{
+				newList(),
+				newField("bicycle"),
+				newWildcard()},
+			false},
+
+
+	{"filter", `{  [?( @.price<3 )]  }`,
+		[]Node{
+				newList(),
+				newFilter(newList(), newList(), "<"),
+				newList(),
+				newField("price"),
+				newList(),
+				newInt(3)},
+	false},
 	{"recursive", `{..}`, []Node{newList(), newRecursive()}, false},
+
+
 	{"recurField", `{..price}`,
 		[]Node{newList(), newRecursive(), newField("price")}, false},
+
+
 	{"arraydict", `{['book.price']}`, []Node{newList(),
 		newField("book"), newField("price"),
 	}, false},
@@ -65,8 +118,24 @@ var parserTests = []parserTest{
 		[]Node{newList(), newFilter(newList(), newList(), "=="), newList(), newField("status"), newField("nodeInfo"), newField("osImage"), newList(), newText("()")}, false},
 	{"paired parentheses in double quotes and with double quotes escape", `{[?(@.status.nodeInfo.osImage == "(\"\")")]}`,
 		[]Node{newList(), newFilter(newList(), newList(), "=="), newList(), newField("status"), newField("nodeInfo"), newField("osImage"), newList(), newText("(\"\")")}, false},
-	{"unregular parentheses in double quotes", `{[?(@.test == "())(")]}`,
-		[]Node{newList(), newFilter(newList(), newList(), "=="), newList(), newField("test"), newList(), newText("())(")}, false},
+
+
+
+		{"unregular parentheses in double quotes", ` { [?(  @.test == "())("   )] }`,
+		[]Node{
+		newList(),
+
+		newFilter(newList(), newList(), "=="),
+
+		newList(),
+		newField("test"),
+
+		newList(),
+
+		newText("())(")}, false},
+
+
+
 	{"plain text in single quotes", `{[?(@.status.nodeInfo.osImage == 'Linux')]}`,
 		[]Node{newList(), newFilter(newList(), newList(), "=="), newList(), newField("status"), newField("nodeInfo"), newField("osImage"), newList(), newText("Linux")}, false},
 	{"test filter suffix", `{[?(@.status.nodeInfo.osImage == "{[()]}")]}`,

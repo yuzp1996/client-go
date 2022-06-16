@@ -18,6 +18,9 @@ package jsonpath
 
 import "fmt"
 
+// 看起来 这里的节点也很有意思  有些是 Text 有些是 List 有些是 Filter
+// 通过 parse 处理后的数据 就是这些节点了
+
 // NodeType identifies the type of a parse tree node.
 type NodeType int
 

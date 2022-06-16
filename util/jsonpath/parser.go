@@ -119,8 +119,10 @@ func (p *Parser) parseText(cur *ListNode) error {
 	for {
 		if strings.HasPrefix(p.input[p.pos:], leftDelim) {
 			if p.pos > p.start {
+				// 加入前面的那些字符串
 				cur.append(newText(p.consumeText()))
 			}
+			// 解析这其中的那些东西
 			return p.parseLeftDelim(cur)
 		}
 		if p.next() == eof {
@@ -129,6 +131,7 @@ func (p *Parser) parseText(cur *ListNode) error {
 	}
 	// Correctly reached EOF.
 	if p.pos > p.start {
+		// 加入之后的字符串
 		cur.append(newText(p.consumeText()))
 	}
 	return nil
@@ -145,11 +148,13 @@ func (p *Parser) parseLeftDelim(cur *ListNode) error {
 }
 
 func (p *Parser) parseInsideAction(cur *ListNode) error {
+
 	prefixMap := map[string]func(*ListNode) error{
 		rightDelim: p.parseRightDelim,
 		"[?(":      p.parseFilter,
 		"..":       p.parseRecursive,
 	}
+
 	for prefix, parseFunc := range prefixMap {
 		if strings.HasPrefix(p.input[p.pos:], prefix) {
 			return parseFunc(cur)
@@ -373,7 +378,7 @@ Loop:
 	if p.next() != ']' {
 		return fmt.Errorf("unclosed array expect ]")
 	}
-	reg := regexp.MustCompile(`^([^!<>=]+)([!<>=]+)(.+?)$`)
+	reg := regexp.MustCompile(`^([^!<>=]+)([!<>=~]+)(.+?)$`)
 	text := p.consumeText()
 	text = text[:len(text)-2]
 	value := reg.FindStringSubmatch(text)
